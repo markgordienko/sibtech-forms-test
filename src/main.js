@@ -4,6 +4,8 @@ import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
 import { loadFonts } from "./plugins/webfontloader";
+import "./styles/STStyles.scss";
+import "./styles/colorThemeST.scss";
 
 loadFonts();
 

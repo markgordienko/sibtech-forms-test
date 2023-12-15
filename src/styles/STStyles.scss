@@ -1,0 +1,38 @@
+@font-face {
+  font-family: "Cera Pro";
+  src: url("@/assets/fonts/CeraPro-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Cera Pro-Medium";
+  src: url("@/assets/fonts/CeraPro-Medium.ttf") format("truetype");
+}
+
+body,
+html {
+  font-family: "Cera Pro";
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+}
+
+a {
+  color: var(--primary-color, #3ea748);
+}
+
+h1 {
+  color: black;
+  font-family: Cera Pro-Medium;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+p {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.64px;
+}
