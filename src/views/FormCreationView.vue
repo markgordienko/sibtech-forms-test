@@ -107,7 +107,9 @@ export default {
       const serializedObject = encodeURIComponent(
         JSON.stringify(this.currentForm)
       );
-      const url = `${window.location.origin}/preview?serializedObject=${serializedObject}`;
+      const url = `${
+        window.location.origin + process.env.BASE_URL
+      }#/preview?serializedObject=${serializedObject}`;
       window.open(url, "_blank");
     },
 
