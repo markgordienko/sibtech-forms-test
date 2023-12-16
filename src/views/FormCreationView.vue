@@ -54,6 +54,7 @@
                 btnHeight="50px"
                 class="mt-2"
                 btnText="Сохранить"
+                @click="saveForm"
               ></STButton>
             </div>
           </div>
@@ -108,6 +109,10 @@ export default {
       );
       const url = `${window.location.origin}/preview?serializedObject=${serializedObject}`;
       window.open(url, "_blank");
+    },
+
+    saveForm() {
+      this.$router.push("/forms-list/forms");
     },
   },
 };

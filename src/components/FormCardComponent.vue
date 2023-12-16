@@ -13,6 +13,7 @@
             textColor="var(--primary-color, #3ea748)"
             :fontWeight="500"
             btnText="Редактировать"
+            @click="editForm"
           ></STButton>
         </v-col>
       </v-row>
@@ -61,6 +62,16 @@ export default {
      */
     deleteForm() {
       this.$store.dispatch("deleteForm", this.formCard);
+    },
+
+    /**
+     * Метод открывает страницу редактирования формы
+     */
+    editForm() {
+      this.$router.push({
+        name: "formCreation",
+        params: { id: this.formCard.id },
+      });
     },
   },
 };
