@@ -25,7 +25,7 @@
                 variant="outlined"
                 textColor="var(--primary-color, #3ea748)"
                 class="mb-n3"
-                fontWeight="500"
+                :fontWeight="500"
                 @click="logOut"
               ></STButton>
             </div>

@@ -1,0 +1,183 @@
+<template>
+  <v-dialog v-model="isOpen" max-width="500">
+    <v-card class="custom-modal">
+      <v-card-title class="custom-modal-title">
+        Добавление поля
+        <v-btn
+          flat
+          variant="text"
+          icon
+          class="close-button"
+          @click="closeModal"
+        >
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+      </v-card-title>
+
+      <v-card-text>
+        <!-- Content with radio buttons and labels -->
+        <v-radio-group v-model="selectedOption" inline>
+          <v-radio value="number" label="Число"></v-radio>
+          <v-radio value="string" label="Строка"></v-radio>
+          <v-radio value="select" label="Список"></v-radio>
+        </v-radio-group>
+      </v-card-text>
+
+      <div
+        class="px-5"
+        v-if="selectedOption === 'number' || selectedOption === 'string'"
+      >
+        <v-row>
+          <v-col>
+            <v-text-field
+              variant="solo"
+              label="Имя поля"
+              bg-color="#e0e0e0"
+              flat
+              rounded="lg"
+              v-model="fieldName"
+              autofocus
+            ></v-text-field
+          ></v-col>
+        </v-row>
+      </div>
+      <div v-else class="px-5">
+        <v-row>
+          <v-col cols="7">
+            <v-text-field
+              variant="solo"
+              label="Вопрос поля"
+              bg-color="#e0e0e0"
+              flat
+              rounded="lg"
+              v-model="fieldName"
+              autofocus
+            ></v-text-field
+          ></v-col>
+          <v-col cols="5"
+            ><v-checkbox
+              label="Множественный выбор"
+              v-model="isMultiselect"
+            ></v-checkbox></v-col
+        ></v-row>
+        <v-row>
+          <v-col>
+            <v-text-field
+              v-for="index in multiselectValues.length"
+              :key="index"
+              variant="solo"
+              label="Наименование варианта выбора"
+              bg-color="#e0e0e0"
+              flat
+              rounded="lg"
+              v-model="multiselectValues[index - 1]"
+              class="mt-n3"
+            ></v-text-field
+          ></v-col>
+        </v-row>
+        <v-row class="mt-n10">
+          <v-col align="center"
+            ><v-btn
+              flat
+              variant="text"
+              icon
+              class="close-button"
+              @click="multiselectValues.push('')"
+            >
+              <PlusIcon></PlusIcon> </v-btn
+          ></v-col>
+        </v-row>
+      </div>
+
+      <v-card-actions>
+        <v-btn @click="handleConfirm" color="var(--primary-color)"
+          >Добавить</v-btn
+        ></v-card-actions
+      >
+    </v-card>
+  </v-dialog>
+</template>
+
+<script>
+import PlusIcon from "./icon-components/PlusIcon.vue";
+
+export default {
+  components: { PlusIcon },
+  props: {
+    modalOpen: {
+      type: Boolean,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      selectedOption: "number",
+      fieldName: "",
+      multiselectValues: [""],
+      isMultiselect: false,
+    };
+  },
+  computed: {
+    isOpen: {
+      get() {
+        return this.modalOpen;
+      },
+      set(value) {
+        this.init();
+        this.$emit("update:modalOpen", value);
+      },
+    },
+  },
+  mounted() {
+    this.init();
+  },
+  methods: {
+    init() {
+      this.selectedOption = "number";
+      this.fieldName = "";
+      this.multiselectValues = [""];
+    },
+    closeModal() {
+      this.isOpen = false;
+      this.init();
+    },
+    handleConfirm() {
+      const id = this.$route.params.id;
+      let currentForm = this.$store.state.forms.find((o) => o.id === id);
+      currentForm.fields.push({
+        type: this.selectedOption,
+        name: this.fieldName,
+        options: this.multiselectValues,
+        reqired: false,
+        isMultiselect: this.isMultiselect,
+        order: currentForm.fields.length,
+      });
+      this.closeModal();
+    },
+  },
+};
+</script>
+
+<style scoped>
+.v-radio-group >>> .v-selection-control-group {
+  justify-content: space-evenly;
+}
+.custom-modal {
+  background-color: var(--secondary-color-light);
+}
+
+.custom-modal-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.close-button {
+  color: var(--primary-color);
+  padding: 4px;
+}
+
+.close-button:hover {
+  background-color: transparent;
+}
+</style>

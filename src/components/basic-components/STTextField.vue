@@ -1,25 +1,10 @@
 <template>
-  <v-btn
+  <v-text-field
+    variant="solo"
+    bg-color="var(--secondary-color, #f6f6f6)"
     flat
-    variant="flat"
-    color="var(--primary-color, #3ea748)"
-    class="text-none btn-text custom-btn"
-    :class="{
-      dotted: dotted,
-      medium: fontWeight > 450,
-      'appended-icon': appendIcon,
-    }"
     rounded="lg"
-    :style="{
-      width: btnWidth,
-      height: btnHeight,
-      color: textColor,
-      fontWeight: fontWeight,
-    }"
-  >
-    {{ btnText }}
-    <component class="" :is="appendIcon" v-if="appendIcon" />
-  </v-btn>
+  ></v-text-field>
 </template>
 
 <script>
@@ -58,6 +43,9 @@ export default {
 </script>
 
 <style scoped>
+.v-text-field >>> .v-label {
+  margin-inline-start: 30px !important;
+}
 .appended-icon {
   display: inline-flex;
 }

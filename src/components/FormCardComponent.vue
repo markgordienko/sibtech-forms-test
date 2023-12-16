@@ -11,7 +11,7 @@
             btnHeight="42px"
             variant="outlined"
             textColor="var(--primary-color, #3ea748)"
-            fontWeight="500"
+            :fontWeight="500"
             btnText="Редактировать"
           ></STButton>
         </v-col>
@@ -31,7 +31,7 @@
             btnHeight="42px"
             variant="text"
             textColor="var(--primary-color, #3ea748)"
-            fontWeight="500"
+            :fontWeight="500"
             btnText="Удалить"
           ></STButton
         ></v-col>

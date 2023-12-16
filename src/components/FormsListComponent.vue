@@ -31,8 +31,24 @@ export default {
   },
   methods: {
     createForm() {
-      // здесь должна быть какая-то логика операции log out
-      this.$router.push("/create-form");
+      let id = this.uuidv4();
+      this.$store.dispatch("addValueToForms", {
+        id: id,
+        name: "Форма регистрации участников",
+        author: "user1",
+        creationDate: "01.01.23",
+        fields: [],
+      });
+      this.$router.push({ name: "formCreation", params: { id: id } });
+    },
+
+    uuidv4() {
+      return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, (c) =>
+        (
+          c ^
+          (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+        ).toString(16)
+      );
     },
   },
 };
