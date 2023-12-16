@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="isOpen" max-width="500">
+  <v-dialog v-model="isOpen" max-width="500" @keydown.enter="handleConfirm">
     <v-card class="custom-modal">
       <v-card-title class="custom-modal-title">
         Добавление поля
@@ -76,7 +76,7 @@
           ></v-col>
         </v-row>
         <v-row class="mt-n10">
-          <v-col align="center"
+          <v-col align="right"
             ><v-btn
               flat
               variant="text"
@@ -86,6 +86,20 @@
             >
               <PlusIcon></PlusIcon> </v-btn
           ></v-col>
+          <v-col align="left">
+            <v-btn
+              flat
+              variant="text"
+              icon
+              class="close-button"
+              :disabled="multiselectValues.length == 1"
+              @click="
+                if (multiselectValues.length > 1) multiselectValues.pop();
+              "
+            >
+              <MinusIcon></MinusIcon>
+            </v-btn>
+          </v-col>
         </v-row>
       </div>
 
@@ -100,9 +114,10 @@
 
 <script>
 import PlusIcon from "./icon-components/PlusIcon.vue";
+import MinusIcon from "./icon-components/MinusIcon.vue";
 
 export default {
-  components: { PlusIcon },
+  components: { PlusIcon, MinusIcon },
   props: {
     modalOpen: {
       type: Boolean,

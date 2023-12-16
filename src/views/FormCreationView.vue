@@ -45,7 +45,7 @@
                 textColor="var(--primary-color, #3ea748)"
                 class="mb-n3"
                 :fontWeight="500"
-                @click="logOut"
+                @click="previewForm"
               ></STButton>
             </div>
             <div class="side-menu-footer">
@@ -103,6 +103,13 @@ export default {
     logOut() {
       // здесь должна быть какая-то логика операции log out
       this.$router.push("/");
+    },
+    previewForm() {
+      const serializedObject = encodeURIComponent(
+        JSON.stringify(this.currentForm)
+      );
+      const url = `${window.location.origin}/preview?serializedObject=${serializedObject}`;
+      window.open(url, "_blank");
     },
   },
 };

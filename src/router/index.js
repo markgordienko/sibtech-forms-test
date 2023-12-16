@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import AuthView from "../views/AuthView.vue";
 import FormsListView from "../views/FormsListView.vue";
 import FormCreationView from "../views/FormCreationView.vue";
+import FormPreviewView from "../views/FormPreviewView.vue";
 
 import FormsListComponent from "../components/FormsListComponent.vue";
 import FieldsComponent from "../components/FieldsComponent.vue";
@@ -35,6 +36,14 @@ const routes = [
       },
     ],
     component: FormCreationView,
+  },
+  {
+    path: "/preview",
+    name: "preview",
+    props: (route) => ({
+      serializedObject: route.query.serializedObject,
+    }),
+    component: FormPreviewView,
   },
 ];
 

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="form" class="container ttt pa-4">
+  <div v-if="form" class="container pa-4">
     <v-row class="">
       <v-col class="mb-6"
         ><h2>{{ form.name }}</h2></v-col
@@ -37,18 +37,30 @@
       <v-col>
         <v-checkbox
           base-color="var(--primary-color)"
+          color="var(--primary-color)"
           density="compact"
           label="Нажимая кнопку «Отправить», я принимаю условия политики конфиденциальности"
         ></v-checkbox>
       </v-col>
     </v-row>
+    <v-row
+      ><v-col align="center"
+        ><STButton
+          btnWidth="160px"
+          btnHeight="50px"
+          class="mt-2"
+          btnText="Сохранить"
+          @click="logIn"
+        ></STButton></v-col
+    ></v-row>
   </div>
 </template>
 <script>
 import logoSrc from "../assets/logo.png";
+import STButton from "./basic-components/STButton.vue";
 
 export default {
-  components: {},
+  components: { STButton },
   props: {
     form: {
       type: Object,
@@ -77,13 +89,17 @@ export default {
   align-items: flex-start;
   justify-content: space-evenly;
 }
+.v-checkbox >>> .v-label {
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
 .red-text {
   color: red;
 }
-.ttt {
+.container {
   background-color: white;
   border-radius: 20px;
-  max-height: 80vh;
+  max-height: 85vh;
   overflow-y: auto;
 }
 .v-text-field >>> .v-label {

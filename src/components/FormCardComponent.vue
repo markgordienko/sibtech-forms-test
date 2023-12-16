@@ -33,6 +33,7 @@
             textColor="var(--primary-color, #3ea748)"
             :fontWeight="500"
             btnText="Удалить"
+            @click="deleteForm"
           ></STButton
         ></v-col>
       </v-row>
@@ -52,6 +53,11 @@ export default {
     formCard: {
       type: Object,
       default: null,
+    },
+  },
+  methods: {
+    deleteForm() {
+      this.$store.dispatch("deleteForm", this.formCard);
     },
   },
 };

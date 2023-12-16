@@ -14,6 +14,13 @@ export default createStore({
     addValueToForms: (state, newValue) => {
       state.forms.push(newValue);
     },
+    deleteForm: (state, form) => {
+      const index = state.forms.indexOf(form);
+      if (index > -1) {
+        // only splice array when item is found
+        state.forms.splice(index, 1); // 2nd parameter means remove one item only
+      }
+    },
   },
   actions: {
     updateForms: ({ commit }, newValue) => {
@@ -21,6 +28,9 @@ export default createStore({
     },
     addValueToForms: ({ commit }, newValue) => {
       commit("addValueToForms", newValue);
+    },
+    deleteForm: ({ commit }, form) => {
+      commit("deleteForm", form);
     },
   },
   modules: {},

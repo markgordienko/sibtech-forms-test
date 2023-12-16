@@ -8,14 +8,9 @@
     </v-row>
     <FormCardComponent
       class="mb-7"
-      v-for="i in 3"
-      :key="i"
-      :formCard="{
-        id: 1,
-        name: 'Форма регистрации участников',
-        author: 'user1',
-        creationDate: '01.01.23',
-      }"
+      v-for="item in forms"
+      :key="item.id"
+      :formCard="item"
     ></FormCardComponent>
   </div>
 </template>
@@ -29,14 +24,34 @@ export default {
     FormCardComponent,
     STButton,
   },
+  data: function () {
+    return {
+      forms: [],
+    };
+  },
+  mounted() {
+    if (this.$store.state.forms.length === 0) {
+      for (let i = 0; i < 3; i++) {
+        this.$store.dispatch("addValueToForms", {
+          id: this.uuidv4(),
+          name: "Форма регистрации участников",
+          author: "user1",
+          creationDate: "01.01.23",
+          fields: [],
+        });
+      }
+    }
+    this.forms = this.$store.state.forms;
+  },
   methods: {
     createForm() {
       let id = this.uuidv4();
+      let date = new Date();
       this.$store.dispatch("addValueToForms", {
         id: id,
         name: "Форма регистрации участников",
         author: "user1",
-        creationDate: "01.01.23",
+        creationDate: date.toLocaleDateString("ru-RU"),
         fields: [],
       });
       this.$router.push({ name: "formCreation", params: { id: id } });
