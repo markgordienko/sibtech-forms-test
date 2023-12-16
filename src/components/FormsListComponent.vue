@@ -44,6 +44,9 @@ export default {
     this.forms = this.$store.state.forms;
   },
   methods: {
+    /**
+     * Метод создает новую форму
+     */
     createForm() {
       let id = this.uuidv4();
       let date = new Date();
@@ -57,6 +60,9 @@ export default {
       this.$router.push({ name: "formCreation", params: { id: id } });
     },
 
+    /**
+     * Метод генерирует uuidv4
+     */
     uuidv4() {
       return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, (c) =>
         (

@@ -1,6 +1,6 @@
 <template>
   <v-row class="pa-0 ma-0">
-    <v-col cols="3" class="pa-0 ma-0 side-menu-col-container">
+    <v-col cols="3" class="pa-0 ma-0 curtain">
       <div class="side-menu-container">
         <v-col class="d-flex justify-center mt-16">
           <div class="flex-container mt-1">
@@ -54,21 +54,20 @@
                 btnHeight="50px"
                 class="mt-2"
                 btnText="Сохранить"
-                @click="logIn"
               ></STButton>
             </div>
           </div>
         </v-col>
       </div>
     </v-col>
-    <v-col cols="5" class="pa-0 ma-0 mid">
+    <v-col cols="5" class="pa-0 ma-0 main-view-col-container">
       <div class="main-view-container">
         <div class="router-view-container" style="overflow-y: auto">
           <router-view></router-view>
         </div>
       </div>
     </v-col>
-    <v-col cols="4" class="pa-0 ma-0 side-menu-col-container">
+    <v-col cols="4" class="pa-0 ma-0 curtain">
       <div class="">
         <div class="preview-container">
           <PreviewComponent :form="currentForm"></PreviewComponent>
@@ -100,10 +99,9 @@ export default {
     this.currentForm = this.$store.state.forms.find((o) => o.id === id);
   },
   methods: {
-    logOut() {
-      // здесь должна быть какая-то логика операции log out
-      this.$router.push("/");
-    },
+    /**
+     * Метод открывает форму на новой странице
+     */
     previewForm() {
       const serializedObject = encodeURIComponent(
         JSON.stringify(this.currentForm)
@@ -116,20 +114,8 @@ export default {
 </script>
 
 <style scoped>
-.mid {
-  background-color: var(--primary-color);
-}
-.pr {
-  background-color: transparent;
-}
-
-.prepend-icon {
-  /* Add styles for the icon */
-  margin-right: 8px; /* Adjust the margin as needed */
-}
-
-.side-menu-col-container {
-  background-color: var(--primary-color, #f6f6f6);
+.curtain {
+  background-color: var(--primary-color, #3ea748);
 }
 
 .side-menu-container {
@@ -140,19 +126,14 @@ export default {
   height: 100vh;
 }
 
-.side-menu-container2 {
-  border-radius: 0 10px 10px 0;
-  background-color: #f9f9f9;
-  display: flex;
-  flex-grow: 1;
-  flex-direction: column;
-  height: 100vh;
-}
-
 .flex-container {
   display: flex;
   flex-direction: column;
   height: 100%;
+}
+
+.main-view-col-container {
+  background-color: var(--primary-color, #3ea748);
 }
 
 .menu {
@@ -181,6 +162,10 @@ export default {
   font-style: normal;
   font-weight: 200;
   line-height: normal;
+}
+
+.prepend-icon {
+  margin-right: 8px;
 }
 
 .flex-spacer {

@@ -36,8 +36,8 @@
     <v-row class="mt-5">
       <v-col>
         <v-checkbox
-          base-color="var(--primary-color)"
-          color="var(--primary-color)"
+          base-color="var(--primary-color, #3ea748)"
+          color="var(--primary-color, #3ea748)"
           density="compact"
           label="Нажимая кнопку «Отправить», я принимаю условия политики конфиденциальности"
         ></v-checkbox>
@@ -49,14 +49,12 @@
           btnWidth="160px"
           btnHeight="50px"
           class="mt-2"
-          btnText="Сохранить"
-          @click="logIn"
+          btnText="Отправить"
         ></STButton></v-col
     ></v-row>
   </div>
 </template>
 <script>
-import logoSrc from "../assets/logo.png";
 import STButton from "./basic-components/STButton.vue";
 
 export default {
@@ -64,21 +62,8 @@ export default {
   props: {
     form: {
       type: Object,
-      default: () => {
-        return { name: "" };
-      },
+      default: null,
       required: true,
-    },
-  },
-  data() {
-    return {
-      logoSrc: logoSrc,
-    };
-  },
-  methods: {
-    logIn() {
-      // здесь должна быть какая-то логика авторизации
-      this.$router.push("/forms-list");
     },
   },
 };
@@ -89,35 +74,24 @@ export default {
   align-items: flex-start;
   justify-content: space-evenly;
 }
+
 .v-checkbox >>> .v-label {
   align-items: flex-start;
   justify-content: space-evenly;
 }
-.red-text {
-  color: red;
+
+.v-text-field >>> .v-label {
+  margin-inline-start: 30px !important;
 }
+
 .container {
   background-color: white;
   border-radius: 20px;
   max-height: 85vh;
   overflow-y: auto;
 }
-.v-text-field >>> .v-label {
-  margin-inline-start: 30px !important;
-}
 
-.flex-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.flex-spacer {
-  flex-grow: 1;
-}
-
-.auth-form-footer {
-  width: 260px;
-  margin-bottom: 50px;
+.red-text {
+  color: red;
 }
 </style>

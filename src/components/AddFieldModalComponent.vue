@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="isOpen" max-width="500" @keydown.enter="handleConfirm">
+  <v-dialog v-model="isOpen" max-width="500" @keydown.enter="addField">
     <v-card class="custom-modal">
       <v-card-title class="custom-modal-title">
         Добавление поля
@@ -7,7 +7,7 @@
           flat
           variant="text"
           icon
-          class="close-button"
+          class="modal-button"
           @click="closeModal"
         >
           <v-icon>mdi-close</v-icon>
@@ -15,7 +15,6 @@
       </v-card-title>
 
       <v-card-text>
-        <!-- Content with radio buttons and labels -->
         <v-radio-group v-model="selectedOption" inline>
           <v-radio value="number" label="Число"></v-radio>
           <v-radio value="string" label="Строка"></v-radio>
@@ -81,7 +80,7 @@
               flat
               variant="text"
               icon
-              class="close-button"
+              class="modal-button"
               @click="multiselectValues.push('')"
             >
               <PlusIcon></PlusIcon> </v-btn
@@ -91,7 +90,7 @@
               flat
               variant="text"
               icon
-              class="close-button"
+              class="modal-button"
               :disabled="multiselectValues.length == 1"
               @click="
                 if (multiselectValues.length > 1) multiselectValues.pop();
@@ -102,9 +101,8 @@
           </v-col>
         </v-row>
       </div>
-
       <v-card-actions>
-        <v-btn @click="handleConfirm" color="var(--primary-color)"
+        <v-btn @click="addField" color="var(--primary-color, #3ea748)"
           >Добавить</v-btn
         ></v-card-actions
       >
@@ -147,16 +145,20 @@ export default {
     this.init();
   },
   methods: {
+    /**
+     * Метод инициализирует значения полей по-умолчанию
+     */
     init() {
       this.selectedOption = "number";
       this.fieldName = "";
       this.multiselectValues = [""];
+      this.isMultiselect = false;
     },
-    closeModal() {
-      this.isOpen = false;
-      this.init();
-    },
-    handleConfirm() {
+
+    /**
+     * Метод добавляет поле в форму
+     */
+    addField() {
       const id = this.$route.params.id;
       let currentForm = this.$store.state.forms.find((o) => o.id === id);
       currentForm.fields.push({
@@ -169,6 +171,14 @@ export default {
       });
       this.closeModal();
     },
+
+    /**
+     * Метод закрывает модальное окно
+     */
+    closeModal() {
+      this.init();
+      this.isOpen = false;
+    },
   },
 };
 </script>
@@ -177,8 +187,9 @@ export default {
 .v-radio-group >>> .v-selection-control-group {
   justify-content: space-evenly;
 }
+
 .custom-modal {
-  background-color: var(--secondary-color-light);
+  background-color: var(--secondary-color-light, #f6f6f6);
 }
 
 .custom-modal-title {
@@ -187,12 +198,12 @@ export default {
   justify-content: space-between;
 }
 
-.close-button {
-  color: var(--primary-color);
+.modal-button {
+  color: var(--primary-color, #3ea748);
   padding: 4px;
 }
 
-.close-button:hover {
+.modal-button:hover {
   background-color: transparent;
 }
 </style>

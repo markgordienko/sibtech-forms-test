@@ -15,7 +15,7 @@
           btnHeight="71px"
           btnWidth="100%"
           variant="outlined"
-          textColor="var(--primary-color)"
+          textColor="var(--primary-color, #3ea748)"
           dotted
         ></STButton
       ></v-col>
@@ -30,10 +30,10 @@
           style="max-height: 150px"
         >
           <v-row class="mb-n6">
-            <v-col class=""
+            <v-col
               ><p>{{ item.name }}</p></v-col
             >
-            <v-col align="right" class=""
+            <v-col align="right"
               ><STButton
                 btnWidth="120px"
                 btnHeight="25px"
@@ -61,8 +61,8 @@
             ></v-col>
           </v-row>
           <v-spacer></v-spacer>
-          <v-row class="">
-            <v-col class="">
+          <v-row>
+            <v-col>
               <v-checkbox
                 density="compact"
                 label="Сделать поле обязательным"
@@ -71,9 +71,9 @@
             ></v-col>
           </v-row>
         </div>
-        <div v-else class="" style="max-height: 150px">
+        <div v-else style="max-height: 150px">
           <v-row
-            ><v-col align="right" class="">
+            ><v-col align="right">
               <STButton
                 btnWidth="120px"
                 btnHeight="25px"
@@ -119,7 +119,7 @@
           btnHeight="71px"
           btnWidth="100%"
           variant="outlined"
-          textColor="var(--primary-color)"
+          textColor="var(--primary-color, #3ea748)"
           dotted
           @click="modalOpen = !modalOpen"
         ></STButton
@@ -134,7 +134,7 @@
           btnHeight="71px"
           btnWidth="100%"
           variant="outlined"
-          textColor="var(--primary-color)"
+          textColor="var(--primary-color, #3ea748)"
           dotted
         ></STButton
       ></v-col>
@@ -166,18 +166,13 @@ export default {
     this.fields = this.currentForm.fields;
   },
   methods: {
-    createForm() {
-      // здесь должна быть какая-то логика операции log out
-      this.$router.push("/create-form");
-    },
-    closeModal() {
-      this.modalOpen = false;
-    },
+    /**
+     * Метод удаляет поле из формы
+     */
     deleteField(item) {
       const index = this.fields.indexOf(item);
       if (index > -1) {
-        // only splice array when item is found
-        this.fields.splice(index, 1); // 2nd parameter means remove one item only
+        this.fields.splice(index, 1);
       }
     },
   },

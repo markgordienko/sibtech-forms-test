@@ -56,6 +56,9 @@ export default {
     },
   },
   methods: {
+    /**
+     * Метод удаляет форму
+     */
     deleteForm() {
       this.$store.dispatch("deleteForm", this.formCard);
     },

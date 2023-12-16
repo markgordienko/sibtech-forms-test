@@ -43,19 +43,4 @@ body,
   background-color: white;
   display: flex;
 }
-@media (max-width: 900px) {
-  .auth-form-container {
-    width: 100%;
-    border-radius: 0;
-  }
-}
-
-.auth-form {
-  margin-top: 7.7vh;
-  margin-left: 10.6vw;
-}
-
-.unselectable {
-  user-select: none;
-}
 </style>

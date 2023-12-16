@@ -17,18 +17,28 @@ export default createStore({
     deleteForm: (state, form) => {
       const index = state.forms.indexOf(form);
       if (index > -1) {
-        // only splice array when item is found
-        state.forms.splice(index, 1); // 2nd parameter means remove one item only
+        state.forms.splice(index, 1);
       }
     },
   },
   actions: {
+    /**
+     * Обновить список форм
+     */
     updateForms: ({ commit }, newValue) => {
       commit("setForms", newValue);
     },
+
+    /**
+     * Добавить форму в список
+     */
     addValueToForms: ({ commit }, newValue) => {
       commit("addValueToForms", newValue);
     },
+
+    /**
+     * Удалить форму из списка
+     */
     deleteForm: ({ commit }, form) => {
       commit("deleteForm", form);
     },
