@@ -2,7 +2,7 @@
   "name": "sibtech-forms-test",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/markgordienko/sibtech-forms-test/",
+  "homepage": "https://github.com/markgordienko/sibtech-forms-test",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -36,6 +36,7 @@
     "sass": "^1.32.7",
     "sass-loader": "^12.0.0",
     "vue-cli-plugin-vuetify": "~2.5.8",
+    "vue-gh-pages": "^1.19.1",
     "webpack-plugin-vuetify": "^2.0.0-alpha.0"
   }
 }
