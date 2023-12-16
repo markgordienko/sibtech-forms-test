@@ -29,18 +29,7 @@ export default {
 body,
 .preview-page-container {
   background-color: var(--primary-color, #3ea748);
-  padding: 20vh 30vw 20vh 30vw;
+  padding: 5vh 30vw 0vh 30vw;
   height: 100vh;
-}
-
-.preview-form-container {
-  line-height: normal;
-  width: 42.3vw;
-  height: 100vh;
-  z-index: 10;
-  position: absolute;
-  border-radius: 0 10px 10px 0;
-  background-color: white;
-  display: flex;
 }
 </style>

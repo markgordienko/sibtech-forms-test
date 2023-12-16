@@ -113,6 +113,9 @@ export default {
       window.open(url, "_blank");
     },
 
+    /**
+     * Метод сохраняет состояние формы и возвращает к списку форм
+     */
     saveForm() {
       this.$router.push("/forms-list/forms");
     },
